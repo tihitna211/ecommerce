@@ -39,6 +39,7 @@ class _ShopState extends State<Shop> {
         drawer: Drawer(
           child: Column(children: [
             CircleAvatar(
+              radius: 37,
               backgroundImage: AssetImage('assets/shoo2.jpg'),
             ),
             ListTile(
@@ -78,7 +79,7 @@ class _ShopState extends State<Shop> {
                     }));
                   },
                   child: Container(
-                    height: MediaQuery.of(context).size.height * 0.3,
+                    height: MediaQuery.of(context).size.height * 0.1,
                     width: MediaQuery.of(context).size.width * 0.4,
                     child: Image.asset(
                       imagePaths[index % imagePaths.length],

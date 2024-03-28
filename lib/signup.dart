@@ -20,9 +20,14 @@ class _SignUpState extends State<SignUp> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
+        appBar: AppBar(
+          elevation: 0,
+          backgroundColor: Colors.transparent,
+        ),
         body: Container(
           decoration: BoxDecoration(
-              image: DecorationImage(image: AssetImage('assets/girli.jpg'))),
+              image: DecorationImage(
+                  image: AssetImage('assets/girli.jpg'), fit: BoxFit.cover)),
           child: Column(children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.end,

@@ -50,4 +50,4 @@ class TheDetails extends StatelessWidget {
           ),
         ));
   }
-}
+}//the cart , theme shared preference laravel

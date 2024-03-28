@@ -36,7 +36,8 @@ class _profileEditState extends State<profileEdit> {
                   Text('pick image'),
                   ListTile(
                     onTap: () {
-                      imagegal();
+                      imagecam();
+
                       Navigator.pop(context);
                     },
                     leading: Icon(Icons.camera),
@@ -44,7 +45,8 @@ class _profileEditState extends State<profileEdit> {
                   ),
                   ListTile(
                     onTap: () {
-                      imagecam();
+                      imagegal();
+
                       Navigator.pop(context);
                     },
                     leading: Icon(Icons.browse_gallery),

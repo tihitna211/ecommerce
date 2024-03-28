@@ -40,6 +40,8 @@ dependencies:
   flutter_staggered_grid_view:
   carousel_slider: 
   dots_indicator: 
+  shared_preferences: 
+  bloc:
 
 dev_dependencies:
   flutter_test:

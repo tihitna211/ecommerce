@@ -26,33 +26,37 @@ class _HomeState extends State<Home> {
             //backgroundColor: Colors.blueGrey,
             body: Container(
               decoration: BoxDecoration(
-                  image:
-                      DecorationImage(image: AssetImage('assets/girli.jpg'))),
+                  image: DecorationImage(
+                      image: AssetImage('assets/girli.jpg'),
+                      fit: BoxFit.cover)),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                          decoration: BoxDecoration(
-                              color: Colors.grey,
-                              borderRadius: BorderRadius.circular(23),
-                              border: Border.all(
-                                  color: Colors.black,
-                                  style: BorderStyle.solid)),
-                          child: MaterialButton(
-                            onPressed: () {
-                              Navigator.push(context,
-                                  MaterialPageRoute(builder: (context) {
-                                return Shop();
-                              }));
-                            },
-                            child: Text('skip'),
-                          ))
-                    ],
+                  Padding(
+                    padding: const EdgeInsets.only(top: 12),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                            decoration: BoxDecoration(
+                                color: Colors.grey,
+                                borderRadius: BorderRadius.circular(23),
+                                border: Border.all(
+                                    color: Colors.black,
+                                    style: BorderStyle.solid)),
+                            child: MaterialButton(
+                              onPressed: () {
+                                Navigator.push(context,
+                                    MaterialPageRoute(builder: (context) {
+                                  return Shop();
+                                }));
+                              },
+                              child: Text('skip'),
+                            ))
+                      ],
+                    ),
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
