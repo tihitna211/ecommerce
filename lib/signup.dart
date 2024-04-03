@@ -29,21 +29,24 @@ class _SignUpState extends State<SignUp> {
               image: DecorationImage(
                   image: AssetImage('assets/girli.jpg'), fit: BoxFit.cover)),
           child: Column(children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                    decoration: BoxDecoration(
-                        color: Colors.grey,
-                        borderRadius: BorderRadius.circular(23),
-                        border: Border.all(
-                            color: Colors.black, style: BorderStyle.solid)),
-                    child: MaterialButton(
-                      onPressed: () {},
-                      child: Text('skip'),
-                    ))
-              ],
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                      decoration: BoxDecoration(
+                          color: Colors.grey,
+                          borderRadius: BorderRadius.circular(23),
+                          border: Border.all(
+                              color: Colors.black, style: BorderStyle.solid)),
+                      child: MaterialButton(
+                        onPressed: () {},
+                        child: Text('skip'),
+                      ))
+                ],
+              ),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.start,

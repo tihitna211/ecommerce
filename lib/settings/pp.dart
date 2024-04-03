@@ -30,7 +30,7 @@ class _profileEditState extends State<profileEdit> {
       builder: (context) {
         return AlertDialog(
           content: SizedBox(
-              height: 150,
+              height: MediaQuery.of(context).size.height * 0.4,
               child: Column(
                 children: [
                   Text('pick image'),
