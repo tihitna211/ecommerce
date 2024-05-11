@@ -2,14 +2,14 @@ import 'package:ecom/settings/pp.dart';
 import 'package:ecom/thedetails.dart';
 import 'package:flutter/material.dart';
 
-class Shop extends StatefulWidget {
-  const Shop({super.key});
+class Shop extends StatelessWidget {
+  final String username;
+  Shop({
+    super.key,
+    required this.username,
+  });
+  //
 
-  @override
-  State<Shop> createState() => _ShopState();
-}
-
-class _ShopState extends State<Shop> {
   List<String> imagePaths = [
     'assets/girli.jpg',
     'assets/shoe.jpg',
@@ -19,6 +19,7 @@ class _ShopState extends State<Shop> {
     'assets/shoo5.jpg',
     'assets/shooo3.jpg'
   ];
+
   List<String> name = [
     'flowery heels',
     'jordan',
@@ -28,13 +29,16 @@ class _ShopState extends State<Shop> {
     'puma',
     'ergendo'
   ];
+
+  //var username;
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
-          title: Text('shoply'),
+          title: Text('welcome $username to shoply'),
         ),
         drawer: Drawer(
           child: Column(children: [

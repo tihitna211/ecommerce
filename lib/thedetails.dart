@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class TheDetails extends StatelessWidget {
   var name;
   var image;
-
+  var username;
   TheDetails({super.key, required this.name, required this.image});
 
   @override
@@ -20,7 +20,7 @@ class TheDetails extends StatelessWidget {
                   onPressed: () {
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) {
-                      return Shop();
+                      return Shop(username: username.text);
                     }));
                   },
                   icon: Icon(Icons.arrow_back))),

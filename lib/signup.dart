@@ -1,5 +1,6 @@
 import 'package:ecom/shop.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({super.key});
@@ -9,26 +10,32 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
-  TextEditingController email = TextEditingController();
-  TextEditingController password = TextEditingController();
+  Future<void> saveUsername() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('username', usernameController.text);
+  }
+
+  TextEditingController fullnameController = TextEditingController();
+  TextEditingController usernameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
 
   bool VisibleText = true;
+  String error = "";
 
-  var error = "";
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        appBar: AppBar(
-          elevation: 0,
-          backgroundColor: Colors.transparent,
-        ),
-        body: Container(
-          decoration: BoxDecoration(
-              image: DecorationImage(
-                  image: AssetImage('assets/girli.jpg'), fit: BoxFit.cover)),
-          child: Column(children: [
+    return Scaffold(
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+      ),
+      body: Container(
+        decoration: BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage('assets/girli.jpg'), fit: BoxFit.cover)),
+        child: Column(
+          children: [
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Row(
@@ -52,13 +59,11 @@ class _SignUpState extends State<SignUp> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [Text('signup')],
             ),
-            SizedBox(
-              height: 70,
-            ),
+            SizedBox(height: 70),
             Container(
               width: MediaQuery.of(context).size.width * 0.85,
               child: TextFormField(
-                controller: email,
+                controller: fullnameController,
                 decoration: InputDecoration(
                   filled: true,
                   fillColor: Colors.transparent,
@@ -69,13 +74,11 @@ class _SignUpState extends State<SignUp> {
                 ),
               ),
             ),
-            SizedBox(
-              height: 40,
-            ),
+            SizedBox(height: 40),
             Container(
               width: MediaQuery.of(context).size.width * 0.85,
               child: TextFormField(
-                controller: email,
+                controller: usernameController,
                 decoration: InputDecoration(
                   filled: true,
                   fillColor: Colors.transparent,
@@ -86,13 +89,11 @@ class _SignUpState extends State<SignUp> {
                 ),
               ),
             ),
-            SizedBox(
-              height: 40,
-            ),
+            SizedBox(height: 40),
             Container(
               width: MediaQuery.of(context).size.width * 0.85,
               child: TextFormField(
-                controller: email,
+                controller: emailController,
                 decoration: InputDecoration(
                   filled: true,
                   fillColor: Colors.transparent,
@@ -103,62 +104,55 @@ class _SignUpState extends State<SignUp> {
                 ),
               ),
             ),
-            const SizedBox(height: 10),
+            SizedBox(height: 10),
             Container(
               decoration:
                   BoxDecoration(borderRadius: BorderRadius.circular(20)),
               width: MediaQuery.of(context).size.width * 0.85,
               height: MediaQuery.of(context).size.height * 0.15,
-              child: Expanded(
-                child: TextField(
-                  controller: password,
-                  obscureText: VisibleText,
-                  onChanged: (value) {
-                    if (value.length < 8) {
+              child: TextField(
+                controller: passwordController,
+                obscureText: VisibleText,
+                onChanged: (value) {
+                  if (value.length < 8) {
+                    setState(() {
+                      error = "too short";
+                    });
+                  } else if (value.length >= 8 && value.length < 12) {
+                    setState(() {
+                      error = "medium";
+                    });
+                  } else {
+                    setState(() {
+                      error = "good!";
+                    });
+                  }
+                },
+                decoration: InputDecoration(
+                  errorText: error,
+                  errorStyle: TextStyle(
+                      color: (error == 'good')
+                          ? Colors.green
+                          : (error == "too short")
+                              ? Colors.red
+                              : (error == 'medium')
+                                  ? Colors.amber
+                                  : null),
+                  suffixIcon: IconButton(
+                    onPressed: () {
                       setState(() {
-                        error = "too short";
+                        VisibleText = !VisibleText;
                       });
-                    } else if (value.length >= 8 && value.length < 12) {
-                      setState(() {
-                        error = "medium";
-                      });
-                    }
-                    // ignore: curly_braces_in_flow_control_structures
-                    else {
-                      setState(() {
-                        error = "good!";
-                      });
-                    }
-                    ;
-                  },
-                  decoration: InputDecoration(
-                    errorText: error,
-                    errorStyle: TextStyle(
-                        color: (error == 'good!')
-                            ? Colors.green
-                            : (error == "too short")
-                                ? Colors.red
-                                : (error == 'medium')
-                                    ? Colors.amber
-                                    : null),
-                    suffixIcon: IconButton(
-                      onPressed: () {
-                        setState(() {
-                          VisibleText = !VisibleText;
-                        });
-                      },
-                      icon: Icon((VisibleText)
-                          ? Icons.visibility
-                          : (!VisibleText)
-                              ? Icons.visibility_off_outlined
-                              : null),
-                    ),
-                    hintText: "password",
-                    filled: true,
-                    fillColor: Colors.transparent,
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(20),
-                    ),
+                    },
+                    icon: Icon(VisibleText
+                        ? Icons.visibility
+                        : Icons.visibility_off_outlined),
+                  ),
+                  hintText: "password",
+                  filled: true,
+                  fillColor: Colors.transparent,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(20),
                   ),
                 ),
               ),
@@ -167,13 +161,14 @@ class _SignUpState extends State<SignUp> {
               color: Colors.grey,
               autofocus: true,
               onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return Shop();
+                Navigator.pushReplacement(context,
+                    MaterialPageRoute(builder: (context) {
+                  return Shop(username: usernameController.text);
                 }));
               },
               child: Text('signup'),
             )
-          ]),
+          ],
         ),
       ),
     );

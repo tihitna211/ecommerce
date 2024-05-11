@@ -34,104 +34,108 @@ class _SliderPageState extends State<SliderPage> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Builder(builder: (context) {
-        return Scaffold(
-            backgroundColor: Colors.blueGrey,
-            body: Padding(
-              padding: const EdgeInsets.all(14.0),
-              child: Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                          decoration: BoxDecoration(
-                              color: Colors.grey,
-                              borderRadius: BorderRadius.circular(23),
-                              border: Border.all(
-                                  color: Colors.black,
-                                  style: BorderStyle.solid)),
-                          child: MaterialButton(
-                            onPressed: () {
-                              Navigator.push(context,
-                                  MaterialPageRoute(builder: (context) {
-                                return Shop();
-                              }));
-                            },
-                            child: Text('skip'),
-                          ))
-                    ],
-                  ),
-                  CarouselSlider.builder(
-                    itemBuilder: (context, index, realIndex) {
-                      final urlImage = urlImages[index];
-                      return buildImage(urlImage, index);
-                    },
-                    itemCount: urlImages.length,
-                    options: CarouselOptions(
-                      height: MediaQuery.of(context).size.height * 0.78,
-                      autoPlay: true,
-                      autoPlayInterval: Duration(seconds: 1),
-                      enlargeCenterPage: true,
-                      onPageChanged: (index, reason) {
-                        setState(() => activeindes = index);
-                      },
+        return SafeArea(
+          child: Scaffold(
+              backgroundColor: Colors.blueGrey,
+              body: Padding(
+                padding: const EdgeInsets.all(14.0),
+                child: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                            decoration: BoxDecoration(
+                                color: Colors.grey,
+                                borderRadius: BorderRadius.circular(23),
+                                border: Border.all(
+                                    color: Colors.black,
+                                    style: BorderStyle.solid)),
+                            child: MaterialButton(
+                              onPressed: () {
+                                Navigator.push(context,
+                                    MaterialPageRoute(builder: (context) {
+                                  return Shop(username: AutofillHints.username);
+                                }));
+                              },
+                              child: Text('skip'),
+                            ))
+                      ],
                     ),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  DotsIndicator(
-                    dotsCount: urlImages.length,
-                    position: activeindes,
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      MaterialButton(
-                        elevation:
-                            BouncingScrollSimulation.maxSpringTransferVelocity,
-                        shape: Border.all(
-                          style: BorderStyle.solid,
-                          color: Colors.black87,
-                        ),
-                        padding: EdgeInsets.all(8.0),
-                        color: Color.fromARGB(255, 47, 55, 84),
-                        autofocus: true,
-                        onPressed: () {
-                          Navigator.push(context,
-                              MaterialPageRoute(builder: (context) {
-                            return SignUp();
-                          }));
+                    Expanded(
+                      child: CarouselSlider.builder(
+                        itemBuilder: (context, index, realIndex) {
+                          final urlImage = urlImages[index];
+                          return buildImage(urlImage, index);
                         },
-                        child: Text('signup'),
+                        itemCount: urlImages.length,
+                        options: CarouselOptions(
+                          height: MediaQuery.of(context).size.height * 0.78,
+                          autoPlay: true,
+                          autoPlayInterval: Duration(seconds: 1),
+                          enlargeCenterPage: true,
+                          onPageChanged: (index, reason) {
+                            setState(() => activeindes = index);
+                          },
+                        ),
                       ),
-                      MaterialButton(
-                        elevation:
-                            BouncingScrollSimulation.maxSpringTransferVelocity,
-                        shape: Border.all(
-                          style: BorderStyle.solid,
-                          color: Colors.black87,
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    DotsIndicator(
+                      dotsCount: urlImages.length,
+                      position: activeindes,
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        MaterialButton(
+                          elevation: BouncingScrollSimulation
+                              .maxSpringTransferVelocity,
+                          shape: Border.all(
+                            style: BorderStyle.solid,
+                            color: Colors.black87,
+                          ),
+                          padding: EdgeInsets.all(8.0),
+                          color: Color.fromARGB(255, 47, 55, 84),
+                          autofocus: true,
+                          onPressed: () {
+                            Navigator.push(context,
+                                MaterialPageRoute(builder: (context) {
+                              return SignUp();
+                            }));
+                          },
+                          child: Text('signup'),
                         ),
-                        padding: EdgeInsets.all(8.0),
-                        color: Color.fromARGB(255, 47, 55, 84),
-                        autofocus: true,
-                        onPressed: () {
-                          Navigator.push(context,
-                              MaterialPageRoute(builder: (context) {
-                            return Home();
-                          }));
-                        },
-                        child: Text('login'),
-                      )
-                    ],
-                  ),
-                ],
-              ),
-            ));
+                        MaterialButton(
+                          elevation: BouncingScrollSimulation
+                              .maxSpringTransferVelocity,
+                          shape: Border.all(
+                            style: BorderStyle.solid,
+                            color: Colors.black87,
+                          ),
+                          padding: EdgeInsets.all(8.0),
+                          color: Color.fromARGB(255, 47, 55, 84),
+                          autofocus: true,
+                          onPressed: () {
+                            Navigator.push(context,
+                                MaterialPageRoute(builder: (context) {
+                              return Home();
+                            }));
+                          },
+                          child: Text('login'),
+                        )
+                      ],
+                    ),
+                  ],
+                ),
+              )),
+        );
       }),
     );
   }
